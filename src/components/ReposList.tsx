@@ -6,6 +6,7 @@ import {
   Card,
   CardContent,
   Typography,
+  Link,
 } from "@mui/material";
 
 interface ReposListProps {
@@ -14,21 +15,35 @@ interface ReposListProps {
 
 const ReposList: React.FC<ReposListProps> = ({ repos }) => {
   return (
-    <Card sx={{ maxWidth: 500, mx: "auto", mt: 3 }}>
+    <Card
+      sx={{
+        maxWidth: 500,
+        mx: "auto",
+        mt: 3,
+        p: 2,
+        borderRadius: 3,
+        boxShadow: 5,
+      }}
+    >
       <CardContent>
-        <Typography variant="h6">Repositories</Typography>
+        <Typography variant="h6" fontWeight="bold">
+          Repositories
+        </Typography>
         <List>
-          {repos.map((repo) => (
-            <ListItem
-              key={repo.name}
-              button
-              component="a"
-              href={repo.html_url}
-              target="_blank"
-            >
+          {repos.slice(0, 5).map((repo) => (
+            <ListItem key={repo.name}>
               <ListItemText
-                primary={repo.name}
-                secondary={repo.description || "No description"}
+                primary={
+                  <Link
+                    href={repo.html_url}
+                    target="_blank"
+                    color="primary"
+                    underline="hover"
+                  >
+                    {repo.name}
+                  </Link>
+                }
+                secondary={repo.description || "No description available"}
               />
             </ListItem>
           ))}

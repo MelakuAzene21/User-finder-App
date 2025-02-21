@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Box } from "@mui/material";
+import { TextField, Button, Paper, Box } from "@mui/material";
 
 interface SearchBarProps {
   onSearch: (username: string) => void;
@@ -15,17 +15,32 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   };
 
   return (
-    <Box display="flex" justifyContent="center" gap={2} mt={3}>
+    <Paper
+      elevation={3}
+      sx={{
+        p: 2,
+        display: "flex",
+        gap: 2,
+        justifyContent: "center",
+        borderRadius: 3,
+      }}
+    >
       <TextField
         label="Enter GitHub Username"
         variant="outlined"
+        fullWidth
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
-      <Button variant="contained" color="primary" onClick={handleSearch}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleSearch}
+        sx={{ textTransform: "none", fontWeight: "bold" }}
+      >
         Search
       </Button>
-    </Box>
+    </Paper>
   );
 };
 
