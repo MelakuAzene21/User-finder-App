@@ -12,16 +12,17 @@ interface UserProfileProps {
   user: {
     avatar_url: string;
     name: string;
-    login: string;
+    username: string;
     bio: string;
     followers: number;
     following: number;
-    public_repos: number;
+    repositories_count: number;
     html_url: string;
   };
+  platform: string;
 }
 
-const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
+const UserProfile: React.FC<UserProfileProps> = ({ user, platform }) => {
   return (
     <Card
       sx={{
@@ -40,16 +41,16 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
             sx={{ width: 120, height: 120, mb: 2 }}
           />
           <Typography variant="h5" fontWeight="bold">
-            {user.name || user.login}
+            {user.name || user.username}
           </Typography>
-          <Typography color="textSecondary">@{user.login}</Typography>
+          <Typography color="textSecondary">@{user.username}</Typography>
           <Typography mt={2} textAlign="center">
             {user.bio}
           </Typography>
           <Box display="flex" justifyContent="space-around" width="100%" mt={2}>
             <Typography>👥 {user.followers} Followers</Typography>
             <Typography>🔄 {user.following} Following</Typography>
-            <Typography>📦 {user.public_repos} Repos</Typography>
+            <Typography>📦 {user.repositories_count} Repos</Typography>
           </Box>
           <Button
             variant="contained"
@@ -58,7 +59,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
             target="_blank"
             sx={{ mt: 2 }}
           >
-            View Profile
+            View Profile on {platform}
           </Button>
         </Box>
       </CardContent>

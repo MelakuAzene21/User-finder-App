@@ -1,16 +1,26 @@
 import React, { useState } from "react";
-import { TextField, Button, Paper, Box } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Paper,
+  Box,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 
 interface SearchBarProps {
-  onSearch: (username: string) => void;
+  onSearch: (username: string, platform: string) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [username, setUsername] = useState("");
+  const [platform, setPlatform] = useState("github");
 
   const handleSearch = () => {
     if (username.trim()) {
-      onSearch(username);
+      onSearch(username, platform);
     }
   };
 
@@ -26,12 +36,24 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       }}
     >
       <TextField
-        label="Enter GitHub Username"
+        label="Enter Username"
         variant="outlined"
         fullWidth
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
+      <FormControl fullWidth>
+        <InputLabel>Platform</InputLabel>
+        <Select
+          value={platform}
+          onChange={(e) => setPlatform(e.target.value)}
+          label="Platform"
+        >
+          <MenuItem value="github">GitHub</MenuItem>
+          <MenuItem value="gitlab">GitLab</MenuItem>
+          <MenuItem value="devto">dev.to</MenuItem>
+        </Select>
+      </FormControl>
       <Button
         variant="contained"
         color="primary"
