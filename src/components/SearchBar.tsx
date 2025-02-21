@@ -52,6 +52,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           <MenuItem value="github">GitHub</MenuItem>
           <MenuItem value="gitlab">GitLab</MenuItem>
           <MenuItem value="devto">dev.to</MenuItem>
+          <MenuItem value="stackoverflow">Stack Overflow</MenuItem>
         </Select>
       </FormControl>
       <Button

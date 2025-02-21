@@ -9,6 +9,8 @@ import {
   fetchGitLabStarredRepos,
   fetchDevToUser,
   fetchDevToPosts,
+  fetchStackOverflowUser,
+  fetchStackOverflowAnswers,
 } from "./api/github";
 import SearchBar from "./components/SearchBar";
 import UserProfile from "./components/UserProfile";
@@ -61,6 +63,14 @@ const App: React.FC = () => {
         const userPosts = await fetchDevToPosts(username);
         setUser(userData);
         setRepos(userPosts);
+      } else if (platform === "stackoverflow") {
+        const userId = username; // Stack Overflow uses user ID, not username
+        const userData = await fetchStackOverflowUser(userId);
+        const answerCount = await fetchStackOverflowAnswers(userId);
+        setUser({
+          ...userData,
+          answers_count: answerCount,
+        });
       }
     } catch {
       setError("User not found!");
@@ -77,8 +87,8 @@ const App: React.FC = () => {
           Multi-Platform Finder 🚀
         </Typography>
         <Typography variant="subtitle1" color="textSecondary" mb={3}>
-          Search for a GitHub, GitLab, or dev.to user and view their profile,
-          repositories, and posts.
+          Search for a GitHub, GitLab, dev.to, or Stack Overflow user and view
+          their profile, repositories, and posts.
         </Typography>
         <SearchBar onSearch={handleSearch} />
 

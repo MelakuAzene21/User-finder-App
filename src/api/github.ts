@@ -64,3 +64,19 @@ export const fetchDevToPosts = async (username: string) => {
   const { data } = await axios.get(`${DEVTO_API_URL}/@${username}/articles`);
   return data;
 };
+
+
+// Stack Overflow API URL
+const STACK_OVERFLOW_API_URL = "https://api.stackexchange.com/2.3/users";
+
+// Fetch Stack Overflow user data
+export const fetchStackOverflowUser = async (userId: string) => {
+    const { data } = await axios.get(`${STACK_OVERFLOW_API_URL}/${userId}?site=stackoverflow`);
+    return data.items[0]; // Stack Exchange API returns an array of items
+};
+
+// Fetch Stack Overflow user answers count
+export const fetchStackOverflowAnswers = async (userId: string) => {
+    const { data } = await axios.get(`${STACK_OVERFLOW_API_URL}/${userId}/answers?site=stackoverflow`);
+    return data.items.length; // Count of answers
+};

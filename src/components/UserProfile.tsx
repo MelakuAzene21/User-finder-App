@@ -9,16 +9,7 @@ import {
 } from "@mui/material";
 
 interface UserProfileProps {
-  user: {
-    avatar_url: string;
-    name: string;
-    username: string;
-    bio: string;
-    followers: number;
-    following: number;
-    repositories_count: number;
-    html_url: string;
-  };
+  user: any;
   platform: string;
 }
 
@@ -47,10 +38,26 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, platform }) => {
           <Typography mt={2} textAlign="center">
             {user.bio}
           </Typography>
+          {platform === "stackoverflow" && (
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              mt={2}
+            >
+              <Typography>
+                🧑‍💻 Location: {user.location || "Not available"}
+              </Typography>
+              <Typography>💬 Reputation: {user.reputation}</Typography>
+              <Typography>📝 Answers: {user.answers_count}</Typography>
+            </Box>
+          )}
           <Box display="flex" justifyContent="space-around" width="100%" mt={2}>
             <Typography>👥 {user.followers} Followers</Typography>
             <Typography>🔄 {user.following} Following</Typography>
-            <Typography>📦 {user.repositories_count} Repos</Typography>
+            <Typography>
+              📦 {user.repositories_count || user.posts_count} Posts
+            </Typography>
           </Box>
           <Button
             variant="contained"
