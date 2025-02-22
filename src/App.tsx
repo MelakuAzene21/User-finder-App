@@ -34,8 +34,7 @@ const App: React.FC = () => {
   const [error, setError] = useState("");
 
   const handleSearch = async (username: string, platform: string) => {
-    if (!username || platform === platform) return; // Prevent unnecessary re-renders
-
+    
     setError("");
     setUser(null);
     setRepos([]);
