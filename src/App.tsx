@@ -29,17 +29,20 @@ const App: React.FC = () => {
   const [repos, setRepos] = useState<any[]>([]);
   const [starredRepos, setStarredRepos] = useState<any[]>([]);
   const [organizations, setOrganizations] = useState<any[]>([]);
-  const [platform, setPlatform] = useState<string>("");
+  const [platform, setPlatform] = useState<string>("github");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleSearch = async (username: string, platform: string) => {
+    if (!username || platform === platform) return; // Prevent unnecessary re-renders
+
     setError("");
     setUser(null);
     setRepos([]);
     setStarredRepos([]);
     setOrganizations([]);
     setLoading(true);
+    setPlatform(platform);
 
     try {
       if (platform === "github") {
