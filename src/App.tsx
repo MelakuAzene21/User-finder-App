@@ -61,9 +61,7 @@ const App: React.FC = () => {
         setRepos(userRepos);
         setStarredRepos(starredReposData);
       } else if (platform === "devto") {
-        const userData = await fetchDevToUser(username);
-        const userPosts = await fetchDevToPosts(username);
-        setUser(userData);
+        const userPosts = await fetchDevToPosts(username);       
         setRepos(userPosts);
       } else if (platform === "stackoverflow") {
         const userId = username; // Stack Overflow uses user ID, not username

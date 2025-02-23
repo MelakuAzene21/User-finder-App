@@ -4,7 +4,7 @@ import axios from "axios";
 const GITHUB_API_URL = "https://api.github.com/users";
 const GITLAB_API_URL = "https://gitlab.com/api/v4/users";
 const DEVTO_API_URL = "https://dev.to/api/users";
-
+const STACK_OVERFLOW_API_URL = "https://api.stackexchange.com/2.3/users";
 // Fetch GitHub user data
 export const fetchGitHubUser = async (username: string) => {
   const { data } = await axios.get(`${GITHUB_API_URL}/${username}`);
@@ -35,9 +35,13 @@ export const fetchGitHubOrganizations = async (username: string) => {
 
 // Fetch GitLab user data
 export const fetchGitLabUser = async (username: string) => {
-  const { data } = await axios.get(`${GITLAB_API_URL}/${username}`);
-  return data;
+  const { data } = await axios.get(`${GITLAB_API_URL}?username=${username}`);
+  if (data.length === 0) {
+    throw new Error("GitLab user not found");
+  }
+  return data[0]; // GitLab API returns an array
 };
+
 
 // Fetch GitLab repositories
 export const fetchGitLabRepos = async (username: string) => {
@@ -53,21 +57,25 @@ export const fetchGitLabStarredRepos = async (username: string) => {
   return data;
 };
 
-// Fetch dev.to user data
-export const fetchDevToUser = async (username: string) => {
-  const { data } = await axios.get(`${DEVTO_API_URL}/@${username}`);
-  return data;
-};
+// // Fetch dev.to user data
+// export const fetchDevToUser = async (username: string) => {
+//   const { data } = await axios.get(
+//     `https://dev.to/api/articles?username=${username}`
+//   );
+//   return data;
+// };
+
 
 // Fetch dev.to posts (as a form of repositories)
 export const fetchDevToPosts = async (username: string) => {
-  const { data } = await axios.get(`${DEVTO_API_URL}/@${username}/articles`);
+  const { data } = await axios.get(
+    `https://dev.to/api/articles?username=${username}`
+  );
   return data;
 };
 
 
-// Stack Overflow API URL
-const STACK_OVERFLOW_API_URL = "https://api.stackexchange.com/2.3/users";
+
 
 // Fetch Stack Overflow user data
 export const fetchStackOverflowUser = async (userId: string) => {
