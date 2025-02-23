@@ -3,7 +3,6 @@ import axios from "axios";
 // Base API URLs
 const GITHUB_API_URL = "https://api.github.com/users";
 const GITLAB_API_URL = "https://gitlab.com/api/v4/users";
-const DEVTO_API_URL = "https://dev.to/api/users";
 const STACK_OVERFLOW_API_URL = "https://api.stackexchange.com/2.3/users";
 // Fetch GitHub user data
 export const fetchGitHubUser = async (username: string) => {
@@ -56,14 +55,6 @@ export const fetchGitLabStarredRepos = async (username: string) => {
   );
   return data;
 };
-
-// // Fetch dev.to user data
-// export const fetchDevToUser = async (username: string) => {
-//   const { data } = await axios.get(
-//     `https://dev.to/api/articles?username=${username}`
-//   );
-//   return data;
-// };
 
 
 // Fetch dev.to posts (as a form of repositories)

@@ -7,7 +7,6 @@ import {
   fetchGitLabUser,
   fetchGitLabRepos,
   fetchGitLabStarredRepos,
-  fetchDevToUser,
   fetchDevToPosts,
   fetchStackOverflowUser,
   fetchStackOverflowAnswers,
